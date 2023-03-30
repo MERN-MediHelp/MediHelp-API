@@ -13,7 +13,8 @@ async function LoadTools (req, res, next) {
         name: req.body.toolName,
         description: req.body.toolDescription
     }
-
+    console.log(req.body);
+    console.log(newTool);
     let result = await db.collection("medical equipment").insertOne(newTool);
 
     if (result) {

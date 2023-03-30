@@ -8,9 +8,23 @@ import express from "express";
 const app = express();
 import bodyParser from "body-parser";
 import router from "./routes/tools.routes.mjs";
+import cors from "cors";
+
+const corsOptions = { 
+    origin: "http://localhost:3000",
+    optionSuccessStatus: 200,
+}
 
 // initiallize app
 app.use(bodyParser.json());
+app.use(cors(corsOptions));
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+  });
+app.use(express.json());
 app._router.use(bodyParser.urlencoded({ extended: false }));
 app.use("/tools", router);
 
