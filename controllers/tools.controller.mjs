@@ -9,12 +9,16 @@ async function getAllTools (req, res) {
 
 async function LoadTools (req, res, next) {
     var newTool = new Object();
+    res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     newTool =  {
         name: req.body.toolName,
-        description: req.body.toolDescription
-    }
-    console.log(req.body);
-    console.log(newTool);
+        description: req.body.toolDescription,
+      };
+    // console.log(req.body);
+    // console.log(req.body.toolName);
+    // console.log(newTool);
     let result = await db.collection("medical equipment").insertOne(newTool);
 
     if (result) {

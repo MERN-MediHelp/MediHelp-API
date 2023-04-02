@@ -12,8 +12,8 @@ var corsOptions = {
     Headers: "Content-Type",
 }
 
-router.get('/', cors(corsOptions) , getAllTools);
-router.get('/post', cors(corsOptions), LoadTools);
+router.get('/', cors(corsOptions),  getAllTools);
+router.post('/post', cors(corsOptions),  LoadTools);
 
 // module.exports = router;
 export default router;
