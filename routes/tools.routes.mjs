@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 const router = express.Router();
-import {getAllTools, LoadTools} from "../controllers/tools.controller.mjs";
+import {getAllTools, LoadTools, DeleteTools} from "../controllers/tools.controller.mjs";
 
 // this method is only for static origin
 // refer https://expressjs.com/en/resources/middleware/cors.html for more details
@@ -14,6 +14,7 @@ var corsOptions = {
 
 router.get('/', cors(corsOptions),  getAllTools);
 router.post('/post', cors(corsOptions),  LoadTools);
+router.delete('/delete/:id', cors(corsOptions),  DeleteTools);
 
 // module.exports = router;
 export default router;
