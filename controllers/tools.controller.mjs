@@ -1,4 +1,5 @@
 import db from "../db/conn.mjs";
+import { ObjectId } from "mongodb";
 
 async function getAllTools (req, res) { 
     let collection  = await db.collection("medical equipment");
@@ -28,7 +29,19 @@ async function LoadTools (req, res, next) {
     }
 }
 
+async function DeleteTools(req, res) {
+    const toDelete = { _id: new ObjectId(req.params.id)};
+    let result = await db.collection("medical equipment").deleteOne(toDelete);
+
+    if (result) {
+        res.send(result).status(200);
+    } else {    
+        res.send("Error").status(500);
+    }
+}
+
 export {
     getAllTools,
     LoadTools,
+    DeleteTools,
 }
