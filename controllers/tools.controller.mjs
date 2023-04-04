@@ -40,8 +40,21 @@ async function DeleteTools(req, res) {
     }
 }
 
+async function UpdateTools(req, res) {
+    const toUpdate = { _id: new ObjectId(req.params.id)};
+    const updates = { $set: { name: req.body.name, description: req.body.description } };
+    let result = await db.collection("medical equipment").updateOne(toUpdate, updates);
+
+    if (result) {
+        res.send(result).status(200);
+    } else {    
+        res.send("Error").status(500);
+    }
+}
+
 export {
     getAllTools,
     LoadTools,
     DeleteTools,
+    UpdateTools,
 }
